@@ -7,25 +7,28 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212; /* Pure black background */
-            color: #e0e0e0; /* Light grey text for contrast */
+            background: url('https://envs.sh/JXE.jpg') no-repeat center center fixed; 
+            background-size: cover;
+            color: #e0e0e0;
             margin: 0;
             padding: 0;
         }
         header {
             padding: 20px;
-            background: #1f1f1f; /* Darker grey header background */
+            background: rgba(31, 31, 31, 0.8); /* Darker grey header background with transparency */
             color: #f1c40f; /* Gold-yellow text for accent */
             text-align: center;
             box-shadow: 0 4px 2px -2px #2c2c2c; /* Slight shadow for depth */
+            backdrop-filter: blur(5px); /* Blur background behind header */
         }
         section {
             padding: 20px;
             margin: 20px auto;
             max-width: 800px;
-            background: #1c1c1c; /* Dark grey background for sections */
+            background: rgba(28, 28, 28, 0.8); /* Dark grey background for sections with transparency */
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Box shadow for depth */
+            backdrop-filter: blur(5px); /* Blur background behind section */
         }
         h2 {
             color: #f1c40f; /* Match header accent color */
@@ -36,7 +39,7 @@
         }
         footer {
             padding: 10px;
-            background: #1f1f1f;
+            background: rgba(31, 31, 31, 0.8); /* Darker grey footer background with transparency */
             color: #e0e0e0;
             text-align: center;
             border-top: 1px solid #2c2c2c; /* Border for separation */
@@ -44,6 +47,7 @@
             width: 100%;
             bottom: 0;
             box-shadow: 0 -4px 2px -2px #2c2c2c; /* Top shadow for depth */
+            backdrop-filter: blur(5px); /* Blur background behind footer */
         }
         @media (max-width: 768px) {
             section {
@@ -75,7 +79,7 @@
     <ul>
         <li>Project 1: <a href="#">Description of project 1.</a></li>
         <li>Project 2: <a href="#">Description of project 2.</a></li>
-        <li>Project 3:: <a href="#">Description of project 3.</a></li>
+        <li>Project 3: <a href="#">Description of project 3.</a></li>
     </ul>
 </section>
 
