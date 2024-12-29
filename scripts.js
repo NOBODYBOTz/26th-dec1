@@ -1,35 +1,19 @@
-javascript
-// Password or key to allow access
-const correctPassword = 'NOBODY733';
+let stopRequest = false;
 
-// Handling the login form submission
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    const loginPassword = document.getElementById('loginPassword').value;
-
-    if (loginPassword === correctPassword) {document.getElementById('loginContainer').style.display = 'none';
-        document.getElementById('mainContainer').style.display = 'block';
-    } else {
-        document.getElementById('loginError').style.display = 'block';
-    }
-});
-
-// Handling the main form submission
+// Handle bomber form submission
 document.getElementById('bomberForm').addEventListener('submit', function(event) {
     event.preventDefault();
+    stopRequest = false;  // Reset the stop request flag
 
-    const password = document.getElementById('password').value;
     const phoneNumber = document.getElementById('phoneNumber').value;
     const amount = document.getElementById('amount').value;
 
-    fetch('https://disabled-sisile-project1-1-fe6835f4.koyeb.app/trigger', {
+    fetch('https://<YOUR-KOYEB-APP-URL>.com/trigger', {  // Replace with your Koyeb service URL
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            password: password,
             phoneNumber: phoneNumber,
             amount: amount
         })
@@ -44,3 +28,9 @@ document.getElementById('bomberForm').addEventListener('submit', function(event)
     })
     .catch(error => alert('Error: ' + error.message));
 });
+
+// Handle stop button click
+document.getElementById('stopButton').addEventListener('click', function() {
+    stopRequest = true;
+
+    fetch('https://<YOUR-KOYEB-APP-URL>.com/s
