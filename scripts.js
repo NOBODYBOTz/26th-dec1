@@ -1,6 +1,6 @@
 javascript
 // Password or key to allow access
-const correctPassword = 'your_password';
+const correctPassword = 'NOBODY733';
 
 // Handling the login form submission
 document.getElementById('loginForm').addEventListener('submit', function(event) {
