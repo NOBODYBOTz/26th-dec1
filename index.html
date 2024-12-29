@@ -15,7 +15,15 @@
         </div>
     </header>
     <main>
-        <div class="container">
+        <div class="container" id="login-container">
+            <h2>Login</h2>
+            <form id="login-form">
+                <input type="password" id="key" placeholder="Enter key" required>
+                <button type="submit">Login</button>
+            </form>
+            <div id="login-error" class="error"></div>
+        </div>
+        <div class="container" id="tool-container" style="display: none;">
             <h2>Welcome to the Bomber Tool</h2>
             <p class="notice">For educational purposes only. Misuse of this tool can lead to legal consequences. Always use responsibly and with permission.</p>
             <form id="bomber-form">
@@ -36,6 +44,20 @@
         </div>
     </footer>
     <script>
+        let userKey = '';  // Store user key here
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            userKey = document.getElementById('key').value;
+
+            if (userKey) {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('tool-container').style.display = 'block';
+            } else {
+                document.getElementById('login-error').innerText = 'Please enter a key.';
+            }
+        });
+
         document.getElementById('bomber-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const phone = document.getElementById('phone').value;
@@ -43,11 +65,15 @@
             fetch('https://your-koyeb-app.koyeb.app/bomb', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ phone, amount })
+                body: JSON.stringify({ phone, amount, key: userKey })
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('result').innerText = data.message;
+                if (data.message === 'Unauthorized. Invalid key.') {
+                    document.getElementById('result').innerText = 'Unauthorized access. Invalid key.';
+                } else {
+                    document.getElementById('result').innerText = data.message;
+                }
             })
             .catch(error => {
                 document.getElementById('result').innerText = 'Error: ' + error.message;
