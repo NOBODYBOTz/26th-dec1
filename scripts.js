@@ -23,7 +23,7 @@ document.getElementById('bomberForm').addEventListener('submit', function(event)
     const phoneNumber = document.getElementById('phoneNumber').value;
     const amount = document.getElementById('amount').value;
 
-    fetch('https://your-koyeb-app-url.com/trigger', {
+    fetch('https://disabled-sisile-project1-1-fe6835f4.koyeb.app/trigger', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
