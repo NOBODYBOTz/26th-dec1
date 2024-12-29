@@ -3,33 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bomber Tool</title>
+    <title>Bomber Tool by NOBODY🂱</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to the Bomber Tool</h1>
-        <p class="notice">For educational purposes only. Misuse of this tool can lead to legal consequences. Always use responsibly and with permission.</p>
-        <form id="bomber-form">
-            <input type="text" id="phone" placeholder="Phone Number" required><br>
-            <input type="number" id="amount" placeholder="Number of Requests" required><br>
-            <button type="submit">Send Requests</button>
-        </form>
-        <div id="result"></div>
-    </div>
-
+    <header>
+        <div class="container">
+            <h1>Bomber Tool</h1>
+            <p>By NOBODY🂱</p>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Welcome to the Bomber Tool</h2>
+            <p class="notice">For educational purposes only. Misuse of this tool can lead to legal consequences. Always use responsibly and with permission.</p>
+            <form id="bomber-form">
+                <input type="text" id="phone" placeholder="Phone Number" required>
+                <input type="number" id="amount" placeholder="Number of Requests" required>
+                <button type="submit">Send Requests</button>
+            </form>
+            <div id="result"></div>
+        </div>
+        <div class="image-container">
+            <img src="assets/images/placeholder-image.jpg" alt="Placeholder Image">
+        </div>
+    </main>
     <footer>
-        <p>© 2023 Your Name. All rights reserved.</p>
-        <p>Tool created for educational purposes by Your Name.</p>
+        <div class="container">
+            <p>© 2023 NOBODY🂱. All rights reserved.</p>
+            <p>Tool created for educational purposes by NOBODY🂱.</p>
+        </div>
     </footer>
-
     <script>
         document.getElementById('bomber-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const phone = document.getElementById('phone').value;
             const amount = document.getElementById('amount').value;
-            fetch('https://your-backend-service.koyeb.app/bomb', {
+            fetch('https://your-koyeb-app.koyeb.app/bomb', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ phone, amount })
