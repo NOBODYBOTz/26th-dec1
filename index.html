@@ -30,6 +30,7 @@
                 <input type="text" id="phone" placeholder="Phone Number" required>
                 <input type="number" id="amount" placeholder="Number of Requests" required>
                 <button type="submit">Send Requests</button>
+                <button type="button" id="stop-btn" style="display: none;">Stop</button>
             </form>
             <div id="result"></div>
         </div>
@@ -45,6 +46,7 @@
     </footer>
     <script>
         let userKey = '';  // Store user key here
+        let bombing = false;
 
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -62,23 +64,42 @@
             e.preventDefault();
             const phone = document.getElementById('phone').value;
             const amount = document.getElementById('amount').value;
-            fetch('https://your-koyeb-app.koyeb.app/bomb', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ phone, amount, key: userKey })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message === 'Unauthorized. Invalid key.') {
-                    document.getElementById('result').innerText = 'Unauthorized access. Invalid key.';
-                } else {
-                    document.getElementById('result').innerText = data.message;
-                }
-            })
-            .catch(error => {
-                document.getElementById('result').innerText = 'Error: ' + error.message;
-            });
+            bombing = true;
+            document.getElementById('stop-btn').style.display = 'inline-block';
+            sendRequests(phone, amount);
         });
+
+        document.getElementById('stop-btn').addEventListener('click', function() {
+            bombing = false;
+            document.getElementById('result').innerText = 'Bombing stopped.';
+            document.getElementById('stop-btn').style.display = 'none';
+        });
+
+        async function sendRequests(phone, amount) {
+            try {
+                for (let i = 0; i < amount; i++) {
+                    if (!bombing) break;
+                    const response = await fetch('https://your-koyeb-app.koyeb.app/bomb', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ phone, amount: 1, key: userKey })
+                    });
+                    const data = await response.json();
+                    if (data.message === 'Unauthorized. Invalid key.') {
+                        document.getElementById('result').innerText = 'Unauthorized access. Invalid key.';
+                        bombing = false;
+                        document.getElementById('stop-btn').style.display = 'none';
+                        break;
+                    } else {
+                        document.getElementById('result').innerText = `${data.message} (${i + 1}/${amount})`;
+                    }
+                }
+                document.getElementById('stop-btn').style.display = 'none';
+            } catch (error) {
+                document.getElementById('result').innerText = `Error: ${error.message}`;
+                document.getElementById('stop-btn').style.display = 'none';
+            }
+        }
     </script>
 </body>
 </html>
