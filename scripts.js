@@ -8,7 +8,7 @@ document.getElementById('bomberForm').addEventListener('submit', function(event)
     const phoneNumber = document.getElementById('phoneNumber').value;
     const amount = document.getElementById('amount').value;
 
-    fetch('https://<YOUR-KOYEB-APP-URL>.com/trigger', {  // Replace with your Koyeb service URL
+    fetch('https://disabled-sisile-project1-1-fe6835f4.koyeb.app/trigger', {  // Replace with your Koyeb service URL
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ document.getElementById('bomberForm').addEventListener('submit', function(event)
 document.getElementById('stopButton').addEventListener('click', function() {
     stopRequest = true;
 
-    fetch('https://<YOUR-KOYEB-APP-URL>.com/stop', {  // Replace with your Koyeb service URL
+    fetch('https://disabled-sisile-project1-1-fe6835f4.koyeb.app/stop', {  // Replace with your Koyeb service URL
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
