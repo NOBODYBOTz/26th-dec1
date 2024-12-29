@@ -3,103 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bomber Tool by NOBODY🂱</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Bomber Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Bomber Tool</h1>
-            <p>By NOBODY🂱</p>
-        </div>
-    </header>
-    <main>
-        <div class="container" id="login-container">
-            <h2>Login</h2>
-            <form id="login-form">
-                <input type="password" id="key" placeholder="Enter key" required>
-                <button type="submit">Login</button>
-            </form>
-            <div id="login-error" class="error"></div>
-        </div>
-        <div class="container" id="tool-container" style="display: none;">
-            <h2>Welcome to the Bomber Tool</h2>
-            <p class="notice">For educational purposes only. Misuse of this tool can lead to legal consequences. Always use responsibly and with permission.</p>
-            <form id="bomber-form">
-                <input type="text" id="phone" placeholder="Phone Number" required>
-                <input type="number" id="amount" placeholder="Number of Requests" required>
-                <button type="submit">Send Requests</button>
-                <button type="button" id="stop-btn" style="display: none;">Stop</button>
-            </form>
-            <div id="result"></div>
-        </div>
-        <div class="image-container">
-            <img src="assets/images/placeholder-image.jpg" alt="Placeholder Image">
-        </div>
-    </main>
-    <footer>
-        <div class="container">
-            <p>© 2023 NOBODY🂱. All rights reserved.</p>
-            <p>Tool created for educational purposes by NOBODY🂱.</p>
-        </div>
-    </footer>
-    <script>
-        let userKey = '';  // Store user key here
-        let bombing = false;
+    <div class="container" id="loginContainer">
+        <h1>Bomber Tool - Login</h1>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" name="loginPassword" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <div id="loginError" class="error-message" style="display: none;">Incorrect password, please try again.</div>
+    </div>
 
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            userKey = document.getElementById('key').value;
+    <div class="container" id="mainContainer" style="display: none;">
+        <h1>Bomber Tool</h1>
+        <form id="bomberForm">
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount of Requests:</label>
+                <input type="number" id="amount" name="amount" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 
-            if (userKey) {
-                document.getElementById('login-container').style.display = 'none';
-                document.getElementById('tool-container').style.display = 'block';
-            } else {
-                document.getElementById('login-error').innerText = 'Please enter a key.';
-            }
-        });
-
-        document.getElementById('bomber-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const phone = document.getElementById('phone').value;
-            const amount = document.getElementById('amount').value;
-            bombing = true;
-            document.getElementById('stop-btn').style.display = 'inline-block';
-            sendRequests(phone, amount);
-        });
-
-        document.getElementById('stop-btn').addEventListener('click', function() {
-            bombing = false;
-            document.getElementById('result').innerText = 'Bombing stopped.';
-            document.getElementById('stop-btn').style.display = 'none';
-        });
-
-        async function sendRequests(phone, amount) {
-            try {
-                for (let i = 0; i < amount; i++) {
-                    if (!bombing) break;
-                    const response = await fetch('https://your-koyeb-app.koyeb.app/bomb', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ phone, amount: 1, key: userKey })
-                    });
-                    const data = await response.json();
-                    if (data.message === 'Unauthorized. Invalid key.') {
-                        document.getElementById('result').innerText = 'Unauthorized access. Invalid key.';
-                        bombing = false;
-                        document.getElementById('stop-btn').style.display = 'none';
-                        break;
-                    } else {
-                        document.getElementById('result').innerText = `${data.message} (${i + 1}/${amount})`;
-                    }
-                }
-                document.getElementById('stop-btn').style.display = 'none';
-            } catch (error) {
-                document.getElementById('result').innerText = `Error: ${error.message}`;
-                document.getElementById('stop-btn').style.display = 'none';
-            }
-        }
-    </script>
+    <script src="scripts.js"></script>
 </body>
 </html>
