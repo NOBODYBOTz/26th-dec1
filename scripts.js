@@ -33,4 +33,22 @@ document.getElementById('bomberForm').addEventListener('submit', function(event)
 document.getElementById('stopButton').addEventListener('click', function() {
     stopRequest = true;
 
-    fetch('https://<YOUR-KOYEB-APP-URL>.com/s
+    fetch('https://<YOUR-KOYEB-APP-URL>.com/stop', {  // Replace with your Koyeb service URL
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            stop: true
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message) {
+            alert(data.message);
+        } else if (data.error) {
+            alert(data.error);
+        }
+    })
+    .catch(error => alert('Error: ' + error.message));
+});
